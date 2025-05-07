@@ -1,12 +1,26 @@
+/* App.css */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 .app {
   font-family: Arial, sans-serif;
   background-color: #e6e6e6;
-  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
 .main-container {
-  display: flex;
-  justify-content: flex-start;
   padding: 20px;
-  gap: 20px;
+  flex: 1;
+  display: flex;
+}
+
+.patient-list-wrapper {
+  width: 600px;
+  display: flex;
+  flex-direction: column;
 }
