@@ -9,8 +9,10 @@ function App() {
     <div className="app">
       <Header />
       <div className="main-container">
-        <PatientList />
-        {/* Right-side panel for admitted history will go here later */}
+        <div className="patient-list-wrapper">
+          <PatientList />
+        </div>
+        {/* Right-side panel for admitted history can go here */}
       </div>
     </div>
   );
