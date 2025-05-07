@@ -50,7 +50,7 @@ const PatientList = () => {
         <div className="column-header">
           <div>P.ID</div>
           <div>Name</div>
-          <div>Triage Level</div>
+          <div>Triage</div>
           <div>Time Elapsed</div>
           <div>Edit</div>
         </div>
