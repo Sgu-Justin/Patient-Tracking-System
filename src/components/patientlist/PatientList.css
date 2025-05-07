@@ -1,12 +1,11 @@
 /* PatientList.css */
-/* PatientList.css */
-.patient-list-container {
+.pl-container {
     height: 100%;
     display: flex;
     flex-direction: column;
   }
   
-  .patient-list {
+  .pl-list {
     display: flex;
     flex-direction: column;
     background-color: white;
@@ -16,8 +15,8 @@
     overflow: hidden;
   }
   
-  /* Box 1: Title Header */
-  .list-header {
+  /* Title Header */
+  .pl-header {
     background-color: #4b4395;
     color: white;
     display: flex;
@@ -28,12 +27,12 @@
     flex-shrink: 0;
   }
   
-  .list-header h2 {
+  .pl-header h2 {
     margin: 0;
     font-size: 18px;
   }
   
-  .add-button {
+  .pl-add-btn {
     background-color: #4caf50;
     color: white;
     border: none;
@@ -44,14 +43,14 @@
     transition: background-color 0.2s;
   }
   
-  .add-button:hover {
+  .pl-add-btn:hover {
     background-color: #3d8b40;
   }
   
-  /* Box 2: Column Headers */
-  .column-header {
+  /* Column Headers */
+  .pl-col-header {
     display: grid;
-    grid-template-columns: 60px 2fr 100px 100px 120px;
+    grid-template-columns: 50px 110px 100px 145px 170px 100px;
     background-color: #f0f0f0;
     padding: 10px 16px;
     font-weight: bold;
@@ -60,14 +59,21 @@
     flex-shrink: 0;
   }
   
-  /* Box 3: Scrollable Container */
-  .patient-rows-container {
+  .pl-col-header > div {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 5px;
+  }
+  
+  /* Scrollable Container */
+  .pl-rows-container {
     flex: 1;
     overflow: hidden;
     position: relative;
   }
   
-  .patient-rows-scrollable {
+  .pl-rows-scrollable {
     position: absolute;
     top: 0;
     left: 0;
@@ -77,21 +83,28 @@
   }
   
   /* Patient Rows */
-  .patient-row {
+  .pl-row {
     display: grid;
-    grid-template-columns: 60px 2fr 100px 100px 120px;
+    grid-template-columns: 50px 120px 80px 180px 120px 100px;
     align-items: center;
     padding: 12px 16px;
     border-bottom: 1px solid #eee;
     min-height: 50px;
   }
   
-  .patient-row:hover {
+  .pl-row > div {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 5px;
+  }
+  
+  .pl-row:hover {
     background-color: #f9f9f9;
   }
   
   /* Triage Level Indicator */
-  .triage-circle {
+  .pl-triage-circle {
     display: inline-block;
     width: 24px;
     height: 24px;
@@ -104,49 +117,50 @@
   }
   
   /* Action Buttons */
-  .icon-button {
+  .pl-icon-btn {
     background: none;
     border: none;
     cursor: pointer;
-    margin-right: 6px;
     font-size: 16px;
     color: #555;
     transition: color 0.2s;
+    padding: 6px;
   }
   
-  .icon-button:hover {
+  .pl-icon-btn:hover {
     color: #000;
   }
   
-  .admit-button {
+  .pl-admit-btn {
     background-color: #a5d6a7;
     border: none;
-    padding: 5px 10px;
+    padding: 5px 8px;
     cursor: pointer;
     font-weight: bold;
     border-radius: 4px;
     transition: background-color 0.2s;
+    font-size: 14px;
   }
   
-  .admit-button:hover {
+  .pl-admit-btn:hover {
     background-color: #81c784;
   }
   
   /* Custom Scrollbar */
-  .patient-rows-scrollable::-webkit-scrollbar {
+  .pl-rows-scrollable::-webkit-scrollbar {
     width: 10px;
   }
   
-  .patient-rows-scrollable::-webkit-scrollbar-track {
+  .pl-rows-scrollable::-webkit-scrollbar-track {
     background: #f1f1f1;
     border-radius: 4px;
   }
   
-  .patient-rows-scrollable::-webkit-scrollbar-thumb {
+  .pl-rows-scrollable::-webkit-scrollbar-thumb {
     background-color: #888;
     border-radius: 4px;
   }
   
-  .patient-rows-scrollable::-webkit-scrollbar-thumb:hover {
+  .pl-rows-scrollable::-webkit-scrollbar-thumb:hover {
     background-color: #666;
   }

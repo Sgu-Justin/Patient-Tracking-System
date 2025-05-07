@@ -1,12 +1,11 @@
 /* AdmittedList.css */
-/* AdmittedList.css */
-.admitted-list-container {
+.al-container {
     height: 100%;
     display: flex;
     flex-direction: column;
   }
   
-  .admitted-list {
+  .al-list {
     display: flex;
     flex-direction: column;
     background-color: white;
@@ -16,8 +15,8 @@
     overflow: hidden;
   }
   
-  /* Box 1: Title Header */
-  .list-header {
+  /* Title Header */
+  .al-header {
     background-color: #4b4395;
     color: white;
     display: flex;
@@ -28,21 +27,20 @@
     flex-shrink: 0;
   }
   
-  .list-header h2 {
+  .al-header h2 {
     margin: 0;
     font-size: 18px;
   }
   
-  .header-buttons {
+  .al-header-btns {
     display: flex;
     gap: 10px;
   }
   
-/* Change these button styles in AdmittedList.css */
-.download-button, .clear-button {
-    background-color: #4caf50; /* Same green as add button */
+  .al-download-btn, .al-clear-btn {
+    background-color: #4caf50;
     color: white;
-    border: none; /* Remove border */
+    border: none;
     padding: 6px 12px;
     cursor: pointer;
     font-weight: bold;
@@ -52,19 +50,19 @@
     align-items: center;
   }
   
-  .download-button:hover, .clear-button:hover {
-    background-color: #3d8b40; /* Darker green on hover */
+  .al-download-btn:hover, .al-clear-btn:hover {
+    background-color: #3d8b40;
   }
   
-  .download-icon {
+  .al-download-icon {
     margin-right: 6px;
     font-size: 16px;
   }
   
-  /* Box 2: Column Headers */
-  .column-header {
+  /* Column Headers */
+  .al-col-header {
     display: grid;
-    grid-template-columns: 60px 2fr 80px 120px 1fr;
+    grid-template-columns: 60px 180px 100px 180px 150px;
     background-color: #f0f0f0;
     padding: 10px 16px;
     font-weight: bold;
@@ -73,14 +71,21 @@
     flex-shrink: 0;
   }
   
-  /* Box 3: Scrollable Container */
-  .patient-rows-container {
+  .al-col-header > div {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 5px;
+  }
+  
+  /* Scrollable Container */
+  .al-rows-container {
     flex: 1;
     overflow: hidden;
     position: relative;
   }
   
-  .patient-rows-scrollable {
+  .al-rows-scrollable {
     position: absolute;
     top: 0;
     left: 0;
@@ -90,21 +95,28 @@
   }
   
   /* Patient Rows */
-  .patient-row {
+  .al-row {
     display: grid;
-    grid-template-columns: 60px 2fr 80px 120px 1fr;
+    grid-template-columns: 60px 190px 115px 150px 150px;
     align-items: center;
     padding: 12px 16px;
     border-bottom: 1px solid #eee;
     min-height: 50px;
   }
   
-  .patient-row:hover {
+  .al-row > div {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 5px;
+  }
+  
+  .al-row:hover {
     background-color: #f9f9f9;
   }
   
   /* Triage Level Indicator */
-  .triage-circle {
+  .al-triage-circle {
     display: inline-block;
     width: 24px;
     height: 24px;
@@ -117,20 +129,20 @@
   }
   
   /* Custom Scrollbar */
-  .patient-rows-scrollable::-webkit-scrollbar {
+  .al-rows-scrollable::-webkit-scrollbar {
     width: 10px;
   }
   
-  .patient-rows-scrollable::-webkit-scrollbar-track {
+  .al-rows-scrollable::-webkit-scrollbar-track {
     background: #f1f1f1;
     border-radius: 4px;
   }
   
-  .patient-rows-scrollable::-webkit-scrollbar-thumb {
+  .al-rows-scrollable::-webkit-scrollbar-thumb {
     background-color: #888;
     border-radius: 4px;
   }
   
-  .patient-rows-scrollable::-webkit-scrollbar-thumb:hover {
+  .al-rows-scrollable::-webkit-scrollbar-thumb:hover {
     background-color: #666;
   }
