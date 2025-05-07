@@ -1,0 +1,71 @@
+.patient-list {
+    background: white;
+    border: 2px solid #ccc;
+    padding: 15px;
+    width: 600px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  }
+  
+  .list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #4b4395;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .add-button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th {
+    background-color: #f0f0f0;
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  td {
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .triage-circle {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    color: white;
+    font-size: 14px;
+    line-height: 24px;
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  .icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-right: 5px;
+  }
+  
+  .admit-button {
+    background-color: #a5d6a7;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
