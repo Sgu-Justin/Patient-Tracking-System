@@ -17,10 +17,20 @@ html, body, #root {
   padding: 20px;
   flex: 1;
   display: flex;
+  gap: 20px; /* Space between the two panels */
+  overflow: hidden; /* Prevent any overflow issues */
 }
 
-.patient-list-wrapper {
+.left-panel {
   width: 600px;
   display: flex;
   flex-direction: column;
+  flex-shrink: 0; /* Prevent shrinking */
+}
+
+.right-panel {
+  flex: 1; /* Takes remaining space */
+  display: flex;
+  flex-direction: column;
+  min-width: 0; /* Fixes flexbox overflow issues */
 }
