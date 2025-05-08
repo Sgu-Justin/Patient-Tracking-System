@@ -3,7 +3,7 @@ import './AdmittedList.css';
 import ClearHistory from '../../popups/clearhistory/ClearHistory';
 
 const getTriageColor = (level) => {
-  const colors = ['#c62828', '#ef6c00', '#fdd835', '#9ccc65', '#66bb6a'];
+  const colors = ['#66bb6a', '#9ccc65', '#fdd835', '#ef6c00', '#c62828']
   return colors[5 - level];
 };
 
