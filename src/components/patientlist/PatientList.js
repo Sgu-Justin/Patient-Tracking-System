@@ -2,39 +2,20 @@ import React, { useState } from 'react';
 import './PatientList.css';
 import AddPatient from '../../popups/addpatient/AddPatient';
 import EditPatient from '../../popups/editpatient/EditPatient';
-
-const initialPatients = [
-  { id: '04', name: 'Justin', triage: 5, injury: 'Fractured arm', time: '15:47' },
-  { id: '02', name: 'Bryant', triage: 4, injury: 'Head trauma', time: '03:47' },
-  { id: '06', name: 'Joshua', triage: 3, injury: 'Sprained ankle', time: '01:47' },
-  { id: '08', name: 'Kayden', triage: 2, injury: 'Minor burns', time: '01:47' },
-  { id: '03', name: 'Troy', triage: 1, injury: 'Chest pain', time: '01:47' },
-];
+import AdmitPatient from '../../popups/admitpatient/AdmitPatient';
 
 const getTriageColor = (level) => {
   const colors = ['#c62828', '#ef6c00', '#fdd835', '#9ccc65', '#66bb6a'];
   return colors[5 - level];
 };
 
-const PatientList = () => {
-  const [patients, setPatients] = useState(initialPatients);
+const PatientList = ({ patients, onAddPatient, onAdmitPatient }) => {
   const [showAddPatient, setShowAddPatient] = useState(false);
   const [editingPatient, setEditingPatient] = useState(null);
-
-  const handleAddPatient = (newPatient) => {
-    const id = Date.now().toString().slice(-3);
-    setPatients([...patients, {
-      ...newPatient,
-      id,
-      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-    }]);
-    setShowAddPatient(false);
-  };
+  const [admittingPatient, setAdmittingPatient] = useState(null);
 
   const handleEditPatient = (updatedPatient) => {
-    setPatients(patients.map(p => 
-      p.id === updatedPatient.id ? updatedPatient : p
-    ));
+    onAddPatient(updatedPatient); // This will update the existing patient
     setEditingPatient(null);
   };
 
@@ -86,7 +67,12 @@ const PatientList = () => {
                   >
                     ✎
                   </button>
-                  <button className="pl-admit-btn">Admit</button>
+                  <button 
+                    className="pl-admit-btn"
+                    onClick={() => setAdmittingPatient(p)}
+                  >
+                    Admit
+                  </button>
                 </div>
               </div>
             ))}
@@ -98,7 +84,7 @@ const PatientList = () => {
       {showAddPatient && (
         <AddPatient
           onClose={() => setShowAddPatient(false)}
-          onAddPatient={handleAddPatient}
+          onAddPatient={onAddPatient}
         />
       )}
 
@@ -108,6 +94,15 @@ const PatientList = () => {
           patient={editingPatient}
           onClose={() => setEditingPatient(null)}
           onSave={handleEditPatient}
+        />
+      )}
+
+      {/* Admit Patient Popup */}
+      {admittingPatient && (
+        <AdmitPatient
+          patient={admittingPatient}
+          onClose={() => setAdmittingPatient(null)}
+          onAdmit={onAdmitPatient}
         />
       )}
     </div>
