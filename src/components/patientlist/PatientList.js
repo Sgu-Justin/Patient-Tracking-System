@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './PatientList.css';
 import AddPatient from '../../popups/addpatient/AddPatient';
+import EditPatient from '../../popups/editpatient/EditPatient';
 
 const initialPatients = [
   { id: '04', name: 'Justin', triage: 5, injury: 'Fractured arm', time: '15:47' },
@@ -18,17 +19,23 @@ const getTriageColor = (level) => {
 const PatientList = () => {
   const [patients, setPatients] = useState(initialPatients);
   const [showAddPatient, setShowAddPatient] = useState(false);
+  const [editingPatient, setEditingPatient] = useState(null);
 
   const handleAddPatient = (newPatient) => {
-    // Generate a simple ID (last 3 digits of timestamp)
     const id = Date.now().toString().slice(-3);
-    // Add the new patient to the list
     setPatients([...patients, {
       ...newPatient,
       id,
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     }]);
     setShowAddPatient(false);
+  };
+
+  const handleEditPatient = (updatedPatient) => {
+    setPatients(patients.map(p => 
+      p.id === updatedPatient.id ? updatedPatient : p
+    ));
+    setEditingPatient(null);
   };
 
   return (
@@ -73,7 +80,12 @@ const PatientList = () => {
                 <div className="pl-col-injury">{p.injury}</div>
                 <div className="pl-col-time">{p.time}</div>
                 <div className="pl-col-edit">
-                  <button className="pl-icon-btn">✎</button>
+                  <button 
+                    className="pl-icon-btn"
+                    onClick={() => setEditingPatient(p)}
+                  >
+                    ✎
+                  </button>
                   <button className="pl-admit-btn">Admit</button>
                 </div>
               </div>
@@ -87,6 +99,15 @@ const PatientList = () => {
         <AddPatient
           onClose={() => setShowAddPatient(false)}
           onAddPatient={handleAddPatient}
+        />
+      )}
+
+      {/* Edit Patient Popup */}
+      {editingPatient && (
+        <EditPatient
+          patient={editingPatient}
+          onClose={() => setEditingPatient(null)}
+          onSave={handleEditPatient}
         />
       )}
     </div>
