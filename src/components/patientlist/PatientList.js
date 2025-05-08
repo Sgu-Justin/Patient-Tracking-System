@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './PatientList.css';
+import AddPatient from '../../popups/addpatient/AddPatient';
 
-const patients = [
+const initialPatients = [
   { id: '04', name: 'Justin', triage: 5, injury: 'Fractured arm', time: '15:47' },
   { id: '02', name: 'Bryant', triage: 4, injury: 'Head trauma', time: '03:47' },
   { id: '06', name: 'Joshua', triage: 3, injury: 'Sprained ankle', time: '01:47' },
@@ -15,13 +16,33 @@ const getTriageColor = (level) => {
 };
 
 const PatientList = () => {
+  const [patients, setPatients] = useState(initialPatients);
+  const [showAddPatient, setShowAddPatient] = useState(false);
+
+  const handleAddPatient = (newPatient) => {
+    // Generate a simple ID (last 3 digits of timestamp)
+    const id = Date.now().toString().slice(-3);
+    // Add the new patient to the list
+    setPatients([...patients, {
+      ...newPatient,
+      id,
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    }]);
+    setShowAddPatient(false);
+  };
+
   return (
     <div className="pl-container">
       <div className="pl-list">
         {/* Title Header */}
         <div className="pl-header">
           <h2>Patient Waiting List</h2>
-          <button className="pl-add-btn">+ Add Patient</button>
+          <button 
+            className="pl-add-btn" 
+            onClick={() => setShowAddPatient(true)}
+          >
+            + Add Patient
+          </button>
         </div>
 
         {/* Column Headers */}
@@ -60,6 +81,14 @@ const PatientList = () => {
           </div>
         </div>
       </div>
+
+      {/* Add Patient Popup */}
+      {showAddPatient && (
+        <AddPatient
+          onClose={() => setShowAddPatient(false)}
+          onAddPatient={handleAddPatient}
+        />
+      )}
     </div>
   );
 };
