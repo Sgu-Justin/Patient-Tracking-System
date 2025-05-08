@@ -22,9 +22,7 @@ function App() {
   ]);
 
   const handleAdmitPatient = (patient) => {
-    // Add to admitted list
     setAdmittedPatients([...admittedPatients, patient]);
-    // Remove from waiting list
     setWaitingPatients(waitingPatients.filter(p => p.id !== patient.id));
   };
 
@@ -35,6 +33,10 @@ function App() {
       id,
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     }]);
+  };
+
+  const handleClearHistory = () => {
+    setAdmittedPatients([]);
   };
 
   return (
@@ -49,7 +51,10 @@ function App() {
           />
         </div>
         <div className="right-panel">
-          <AdmittedList patients={admittedPatients} />
+          <AdmittedList 
+            patients={admittedPatients}
+            onClearHistory={handleClearHistory}
+          />
         </div>
       </div>
     </div>

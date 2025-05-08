@@ -1,4 +1,4 @@
-.admit-patient-overlay {
+.clear-history-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -13,7 +13,7 @@
     padding-top: 60px; /* To keep header visible */
   }
   
-  .admit-patient-modal {
+  .clear-history-modal {
     background-color: white;
     padding: 25px;
     border-radius: 8px;
@@ -21,6 +21,7 @@
     width: 400px;
     max-width: 90%;
     position: relative;
+    text-align: center;
   }
   
   .close-btn {
@@ -39,51 +40,49 @@
     color: #333;
   }
   
-  .admit-patient-modal h2 {
+  .clear-history-modal h2 {
     margin-top: 0;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     color: #4b4395;
   }
   
-  .form-group {
-    margin-bottom: 20px;
-  }
-  
-  .form-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
+  .clear-history-modal p {
+    margin-bottom: 25px;
     color: #555;
   }
   
-  .patient-info {
-    padding: 10px;
-    background-color: #f5f5f5;
-    border-radius: 4px;
-    font-size: 16px;
+  .confirmation-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
   }
   
-  .form-group input {
-    width: 95%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
-  }
-  
-  .submit-btn {
+  .confirm-btn {
     background-color: #4caf50;
     color: white;
     border: none;
-    padding: 12px 20px;
+    padding: 10px 25px;
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
-    width: 100%;
-    margin-top: 10px;
     transition: background-color 0.2s;
   }
   
-  .submit-btn:hover {
+  .confirm-btn:hover {
     background-color: #3d8b40;
+  }
+  
+  .cancel-btn {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s;
+  }
+  
+  .cancel-btn:hover {
+    background-color: #d32f2f;
   }

@@ -5,7 +5,8 @@ import EditPatient from '../../popups/editpatient/EditPatient';
 import AdmitPatient from '../../popups/admitpatient/AdmitPatient';
 
 const getTriageColor = (level) => {
-  const colors = ['#c62828', '#ef6c00', '#fdd835', '#9ccc65', '#66bb6a'];
+  const colors = ['#66bb6a', '#9ccc65', '#fdd835', '#ef6c00', '#c62828']
+  //  const colors = ['#c62828', '#ef6c00', '#fdd835', '#9ccc65', '#66bb6a'];
   return colors[5 - level];
 };
 
