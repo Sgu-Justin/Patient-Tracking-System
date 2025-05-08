@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './AdmittedList.css';
+import ClearHistory from '../../popups/clearhistory/ClearHistory';
 
 const getTriageColor = (level) => {
   const colors = ['#c62828', '#ef6c00', '#fdd835', '#9ccc65', '#66bb6a'];
   return colors[5 - level];
 };
 
-const AdmittedList = ({ patients }) => {
+const AdmittedList = ({ patients, onClearHistory }) => {
+  const [showClearHistory, setShowClearHistory] = useState(false);
+
   return (
     <div className="al-container">
       <div className="al-list">
@@ -17,7 +20,12 @@ const AdmittedList = ({ patients }) => {
             <button className="al-download-btn">
               <span className="al-download-icon">↓</span> Download
             </button>
-            <button className="al-clear-btn">Clear History</button>
+            <button 
+              className="al-clear-btn"
+              onClick={() => setShowClearHistory(true)}
+            >
+              Clear History
+            </button>
           </div>
         </div>
 
@@ -54,6 +62,17 @@ const AdmittedList = ({ patients }) => {
           </div>
         </div>
       </div>
+
+      {/* Clear History Popup */}
+      {showClearHistory && (
+        <ClearHistory
+          onClose={() => setShowClearHistory(false)}
+          onConfirm={() => {
+            onClearHistory();
+            setShowClearHistory(false);
+          }}
+        />
+      )}
     </div>
   );
 };
