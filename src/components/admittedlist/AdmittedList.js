@@ -7,8 +7,18 @@ const getTriageColor = (level) => {
   return colors[5 - level];
 };
 
-const AdmittedList = ({ patients, onClearHistory }) => {
+const AdmittedList = ({ patients, onClearHistory, onDownloadHistory }) => {
   const [showClearHistory, setShowClearHistory] = useState(false);
+
+  // Map backend data structure to frontend structure
+  const mappedPatients = patients.map(p => ({
+    id: p.HistoryId,
+    name: p.patientName,
+    triage: parseInt(p.triageLevel),
+    injury: p.injuryType,
+    doctor: p.Doctor,
+    waitTime: p.formattedWaitTime || '00:00:00'
+  }));
 
   return (
     <div className="al-container">
@@ -17,7 +27,10 @@ const AdmittedList = ({ patients, onClearHistory }) => {
         <div className="al-header">
           <h2>Admitted Patient History</h2>
           <div className="al-header-btns">
-            <button className="al-download-btn">
+            <button 
+              className="al-download-btn" 
+              onClick={onDownloadHistory}
+            >
               <span className="al-download-icon">↓</span> Download
             </button>
             <button 
@@ -42,23 +55,27 @@ const AdmittedList = ({ patients, onClearHistory }) => {
         {/* Patient Rows */}
         <div className="al-rows-container">
           <div className="al-rows-scrollable">
-            {patients.map((p) => (
-              <div className="al-row" key={p.id}>
-                <div className="al-col-pid">{p.id}</div>
-                <div className="al-col-name">{p.name}</div>
-                <div className="al-col-triage">
-                  <span
-                    className="al-triage-circle"
-                    style={{ backgroundColor: getTriageColor(p.triage) }}
-                  >
-                    {p.triage}
-                  </span>
+            {mappedPatients.length === 0 ? (
+              <div className="al-no-patients">No admitted patients in history</div>
+            ) : (
+              mappedPatients.map((p) => (
+                <div className="al-row" key={p.id}>
+                  <div className="al-col-pid">{p.id}</div>
+                  <div className="al-col-name">{p.name}</div>
+                  <div className="al-col-triage">
+                    <span
+                      className="al-triage-circle"
+                      style={{ backgroundColor: getTriageColor(p.triage) }}
+                    >
+                      {p.triage}
+                    </span>
+                  </div>
+                  <div className="al-col-doctor">{p.doctor}</div>
+                  <div className="al-col-injury">{p.injury}</div>
+                  <div className="al-col-time">{p.waitTime}</div>
                 </div>
-                <div className="al-col-doctor">{p.doctor}</div>
-                <div className="al-col-injury">{p.injury}</div>
-                <div className="al-col-time">{p.waitTime}</div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </div>
       </div>

@@ -10,13 +10,30 @@ const getTriageColor = (level) => {
   return colors[5 - level];
 };
 
-const PatientList = ({ patients, onAddPatient, onAdmitPatient }) => {
+const PatientList = ({ patients, onAddPatient, onAdmitPatient, onUpdateTriage }) => {
   const [showAddPatient, setShowAddPatient] = useState(false);
   const [editingPatient, setEditingPatient] = useState(null);
   const [admittingPatient, setAdmittingPatient] = useState(null);
 
+  // Map backend data structure to frontend structure
+  const mappedPatients = patients.map(p => ({
+    id: p.id,
+    name: p.patientName,
+    triage: parseInt(p.triageLevel),
+    injury: p.injuryType,
+    time: p.formattedWaitTime || '00:00:00',
+    waitTime: p.waitTime
+  }));
+
+  const handleAdmitSubmit = (patient, doctorName) => {
+    // Pass the patient object and doctor name as separate parameters
+    onAdmitPatient(patient, doctorName);
+  };
   const handleEditPatient = (updatedPatient) => {
-    onAddPatient(updatedPatient); // This will update the existing patient
+    // Update triage level via API
+    if (editingPatient && editingPatient.id) {
+      onUpdateTriage(editingPatient.id, updatedPatient.triage);
+    }
     setEditingPatient(null);
   };
 
@@ -47,36 +64,40 @@ const PatientList = ({ patients, onAddPatient, onAdmitPatient }) => {
         {/* Patient Rows */}
         <div className="pl-rows-container">
           <div className="pl-rows-scrollable">
-            {patients.map((p) => (
-              <div className="pl-row" key={p.id}>
-                <div className="pl-col-pid">{p.id}</div>
-                <div className="pl-col-name">{p.name}</div>
-                <div className="pl-col-triage">
-                  <span
-                    className="pl-triage-circle"
-                    style={{ backgroundColor: getTriageColor(p.triage) }}
-                  >
-                    {p.triage}
-                  </span>
+            {mappedPatients.length === 0 ? (
+              <div className="pl-no-patients">No patients in waiting list</div>
+            ) : (
+              mappedPatients.map((p) => (
+                <div className="pl-row" key={p.id}>
+                  <div className="pl-col-pid">{p.id}</div>
+                  <div className="pl-col-name">{p.name}</div>
+                  <div className="pl-col-triage">
+                    <span
+                      className="pl-triage-circle"
+                      style={{ backgroundColor: getTriageColor(p.triage) }}
+                    >
+                      {p.triage}
+                    </span>
+                  </div>
+                  <div className="pl-col-injury">{p.injury}</div>
+                  <div className="pl-col-time">{p.time}</div>
+                  <div className="pl-col-edit">
+                    <button 
+                      className="pl-icon-btn"
+                      onClick={() => setEditingPatient(p)}
+                    >
+                      ✎
+                    </button>
+                    <button 
+                      className="pl-admit-btn"
+                      onClick={() => setAdmittingPatient(p)}
+                    >
+                      Admit
+                    </button>
+                  </div>
                 </div>
-                <div className="pl-col-injury">{p.injury}</div>
-                <div className="pl-col-time">{p.time}</div>
-                <div className="pl-col-edit">
-                  <button 
-                    className="pl-icon-btn"
-                    onClick={() => setEditingPatient(p)}
-                  >
-                    ✎
-                  </button>
-                  <button 
-                    className="pl-admit-btn"
-                    onClick={() => setAdmittingPatient(p)}
-                  >
-                    Admit
-                  </button>
-                </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </div>
       </div>
@@ -101,10 +122,10 @@ const PatientList = ({ patients, onAddPatient, onAdmitPatient }) => {
       {/* Admit Patient Popup */}
       {admittingPatient && (
         <AdmitPatient
-          patient={admittingPatient}
-          onClose={() => setAdmittingPatient(null)}
-          onAdmit={onAdmitPatient}
-        />
+        patient={admittingPatient}
+        onClose={() => setAdmittingPatient(null)}
+        onAdmit={handleAdmitSubmit}  // Using the new function instead of passing onAdmitPatient directly
+      />
       )}
     </div>
   );

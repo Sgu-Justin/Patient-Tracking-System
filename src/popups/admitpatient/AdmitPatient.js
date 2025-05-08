@@ -6,13 +6,8 @@ const AdmitPatient = ({ patient, onClose, onAdmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!doctor.trim()) return;
     
-    onAdmit({
-      ...patient,
-      doctor: doctor.trim(),
-      waitTime: patient.time // Using the existing time as wait time initially
-    });
+    onAdmit(patient,doctor);
     onClose();
   };
 
